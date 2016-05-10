@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -23,29 +23,28 @@
 <div id="globalBlock">
     <div id="auth">
         <div class="title">
-            <span>Auth</span>
+            <span>Авторизація</span>
         </div>
         <hr>
-        <form action="index.jsp">
-            <input class="input" type="text" placeholder="login">
-            <input class="input" type="text" placeholder="email">
-            <input class="input" type="password" placeholder="password">
-            <span class="text">Are not registered? <br><a class="links"
-                                                          onclick="anichange('#reg'); anichange('#auth'); return false;">Check in</a>.</span>
+        <form action="/auth" method="post">
+            <input class="input" type="text" placeholder="login" name="authlogin">
+            <input class="input" type="password" placeholder="password" name="authpass">
+            <span class="text">Не зараєстровані ?<br><a class="links"
+                       onclick="anichange('#reg'); anichange('#auth'); return false;">Зареєструватись.</a>.</span>
             <button class="submit">Sign in</button>
         </form>
     </div>
     <div id="reg" style="display: none;">
         <div class="title">
-            <span>Registration</span>
+            <span>Реєстрація</span>
         </div>
         <hr>
-        <form action="createProfile.jsp">
-            <input class="input" type="text" placeholder="login">
-            <input class="input" type="text" placeholder="email">
-            <input class="input" type="password" placeholder="password">
-            <span class="text">Already registered?<br><a class="links" <a
-                    onclick="anichange('#reg'); anichange('#auth'); return false;">Login</a>.</span>
+        <form action="/createUser" method="post">
+            <input class="input" type="text" placeholder="login" name="reglogin">
+            <input class="input" type="text" placeholder="email" name="regemail">
+            <input class="input" type="password" placeholder="password" name="regpass">
+            <span class="text">Зареєстровані ?<br><a class="links"
+                    onclick="anichange('#reg'); anichange('#auth'); return false;">Авторизуватись.</a></span>
             <button class="submit">Sign up</button>
         </form>
     </div>
