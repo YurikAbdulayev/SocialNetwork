@@ -1,0 +1,114 @@
+@charset "UTF-8";
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+		background-color: #EAEAEA;
+		margin: 0;
+		padding: 0;
+}
+
+header {
+	width: 100%;
+	min-height: 70px;
+	background-color: rgba(47, 44, 44, .95);
+}
+
+a {
+	text-decoration: none;
+}
+
+.link {
+	padding: 40.188px;
+	display: inline-block;
+  color: #f7f7f7;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.link:hover {
+	background-color: rgba(47, 44, 44, 0.8)
+}
+
+#globalBlock {
+	width: 680px;
+	margin: 0 auto;
+	padding: 0 auto;
+}
+
+#friendsBlock {
+	color: #686868;
+	display: inline-block;
+	float: left;
+	width: 55px;
+	background-color: #F7F7F7;
+	text-align: center;
+	border: 1px solid silver;
+}
+
+#messageBlock, #writeBlock {
+	display: inline-block;
+	float: right;
+	width: 615px;
+	border: 1px solid silver;
+}
+
+#messageBlock {
+	background-color: #FFF;
+	margin-top: 5px;
+}
+
+ul {
+	list-style-type: none;
+	padding: 0;
+}
+
+.message {
+	padding: 10px;
+	/*border: 1px solid silver;*/
+	color: #686868;
+}
+
+#writeBlock {
+	background-color: #F7F7F7;
+}
+
+#message {
+	color: rgb(100, 98, 98);
+	font-family: "Times new romans";
+	margin-left: 3%;
+	width: 80%;
+	height: 60px;
+	margin-top: 1%;
+	resize: none;
+	outline: none;
+	display: inline-block;
+}
+
+#sendMessage {
+	padding: 1%;
+	width: 10%;
+	display: inline-block;
+	background-color: rgba(173, 173, 173, 0.66);
+	border: 1px solid #A8A8A8;	
+	color: #f7f7f7;
+	font-size: 16px;
+	border-radius: 10px;
+	outline:none;	
+	cursor: pointer;
+	float: right;
+	margin-top: 25px;
+	margin-right: 25px;
+}
+
+#sendMessage:hover {
+	background-color: rgb(173, 173, 173);
+}
+
+.photoFriends {
+	width: 90%;
+	display: inline-block;
+}

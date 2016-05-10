@@ -1,6 +1,6 @@
 package me.codaline.controller;
 
-import me.codaline.model.User;
+import me.codaline.model.TestUser;
 import me.codaline.service.UserService;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 @Controller
-public class UserController {
+public class TestUserController {
 
     @Autowired
     UserService service;
@@ -32,7 +32,7 @@ public class UserController {
 //                    String email
 //            ) {
 //        ModelAndView modelAndView = new ModelAndView("success");
-//        User user = service.createUser(firstName, lastName, email);
+//        TestUser user = service.createUser(firstName, lastName, email);
 //        modelAndView.addObject("user", user);
 //        return modelAndView;
 //    }
@@ -45,10 +45,10 @@ public class UserController {
             @RequestParam(value = "lName", required = false) String lastName,
             @RequestParam(value = "e", required = true) String email
     ) throws JSONException {
-        User user = service.createUser(firstName, lastName, email);
-        modelMap.addAttribute("user", user);
+        TestUser testUser = service.createUser(firstName, lastName, email);
+        modelMap.addAttribute("testUser", testUser);
         JSONObject jsonObject = new JSONObject();
-        if (user == null) {
+        if (testUser == null) {
             jsonObject.put("status", false);
         } else {
             jsonObject.put("status", true);
@@ -58,16 +58,16 @@ public class UserController {
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     String getUsers(ModelMap modelMap) {
-        List<User> users = service.getUsers();
-        modelMap.addAttribute("users", users);
-        return "users";
+        List<TestUser> testUsers = service.getUsers();
+        modelMap.addAttribute("testUsers", testUsers);
+        return "testUsers";
     }
 
     @RequestMapping(value = "/user", method = RequestMethod.GET)
     String getUser(ModelMap modelMap, String email) {
-        User user = service.getUser(email);
-        modelMap.addAttribute("user", user);
-        return "user";
+        TestUser testUser = service.getUser(email);
+        modelMap.addAttribute("testUser", testUser);
+        return "testUser";
     }
 
 

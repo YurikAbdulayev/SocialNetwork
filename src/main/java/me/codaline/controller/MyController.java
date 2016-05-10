@@ -6,8 +6,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class MyController {
 
+    boolean authorized = true;
+
     @RequestMapping("/")
     String index() {
-        return "index";
+        if (authorized){
+            return "index";
+        }else {
+            return "auth";
+        }
     }
 }

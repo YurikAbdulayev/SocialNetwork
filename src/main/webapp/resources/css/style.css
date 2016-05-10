@@ -1,0 +1,86 @@
+@charset "UTF-8";
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+		background-color: #EAEAEA;
+		margin: 0;
+		padding: 0;
+}
+
+header {
+	width: 100%;
+	min-height: 70px;
+	background-color: rgba(47, 44, 44, .95);
+}
+
+a {
+	text-decoration: none;
+}
+
+.link {
+	padding: 30.016px;
+	display: inline-block;
+  color: #f7f7f7;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.link:hover {
+	background-color: rgba(47, 44, 44, 0.8)
+}
+
+#profile {
+	float: right;
+	margin-top: 15px;
+	margin-right: 15px;
+}
+
+#nameProfile {
+	display: inline-block;
+	padding-top: 30.016px;
+	color: #f7f7f7;
+}
+
+#profile img {
+	display: inline-block;
+	width: 70px;
+	height: 70px;
+	-webkit-border-radius: 50%;
+	        border-radius: 50%;
+}
+
+#profileTools {
+	position: absolute;
+	padding: 7px;
+	/*width:90px;*/
+	background-color: rgb(30, 28, 28);
+	border-radius: 10px;
+	color: #f7f7f7;
+	z-index: 228;
+	margin-left: 100px;
+	margin-top: 5px;
+	cursor: pointer;	
+}
+
+.tools {
+	width: 100%;
+	padding: 4px;
+}
+
+.tools:hover {
+	padding: 5px;
+	background-color: rgba(47, 44, 44, .95);
+}
+
+.tools a {
+	text-decoration: none;
+	color: #f7f7f7;	
+}
+
+.href {
+	color: #f7f7f7;
+}

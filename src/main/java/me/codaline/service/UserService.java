@@ -1,7 +1,7 @@
 package me.codaline.service;
 
-import me.codaline.dao.UserDao;
-import me.codaline.model.User;
+import me.codaline.dao.TestUserDao;
+import me.codaline.model.TestUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,23 +11,23 @@ import java.util.List;
 public class UserService {
 
     @Autowired
-    UserDao dao;
+    TestUserDao dao;
 
-    public User createUser(String firstName, String lastName, String email) {
-        User user = new User();
-        user.setLastName(lastName);
-        user.setFirstName(firstName);
-        user.setEmail(email);
-        user.setPass(generatePass());
-        dao.save(user);
-        return user;
+    public TestUser createUser(String firstName, String lastName, String email) {
+        TestUser testUser = new TestUser();
+        testUser.setLastName(lastName);
+        testUser.setFirstName(firstName);
+        testUser.setEmail(email);
+        testUser.setPass(generatePass());
+        dao.save(testUser);
+        return testUser;
     }
 
-    public List<User> getUsers() {
+    public List<TestUser> getUsers() {
             return dao.getUsers();
     }
 
-    public User getUser(String email) {
+    public TestUser getUser(String email) {
         return dao.getUser(email);
     }
 
