@@ -22,6 +22,10 @@ public class AuthDao {
         sessionFactory.getCurrentSession().save(user);
     }
 
+    public void update(User user) {
+        sessionFactory.getCurrentSession().update(user);
+    }
+
     public List<User> getUsers() {
         return sessionFactory.getCurrentSession().createCriteria(User.class).list();
     }

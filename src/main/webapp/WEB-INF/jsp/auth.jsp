@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Wecome to our social network</title>
+    <title>Welcome to our social network</title>
     <link rel="stylesheet" href="/resources/css/style.css">
     <link rel="stylesheet" href="/resources/css/styleAuth.css">
     <script type="text/javascript" src="/resources/js/jquery.min.js"></script>
@@ -18,7 +18,7 @@
 </head>
 <body>
 <header>
-    <div id="headerTitle">Wecome to our social network</div>
+    <div id="headerTitle">Welcome to our social network</div>
 </header>
 <div id="globalBlock">
     <div id="auth">
@@ -26,11 +26,15 @@
             <span>Авторизація</span>
         </div>
         <hr>
-        <form action="/auth" method="post">
-            <input class="input" type="text" placeholder="login" name="authlogin">
-            <input class="input" type="password" placeholder="password" name="authpass">
+        <form action="/home" method="post">
+            <input class="input" type="text" placeholder="login" name="authLogin">
+            <input class="input" type="password" placeholder="password" name="authPass">
             <span class="text">Не зараєстровані ?<br><a class="links"
                        onclick="anichange('#reg'); anichange('#auth'); return false;">Зареєструватись.</a>.</span>
+
+            <%--<script>--%>
+                <%--window.alert("sometext");--%>
+            <%--</script>--%>
             <button class="submit">Sign in</button>
         </form>
     </div>
@@ -39,10 +43,12 @@
             <span>Реєстрація</span>
         </div>
         <hr>
-        <form action="/createUser" method="post">
-            <input class="input" type="text" placeholder="login" name="reglogin">
-            <input class="input" type="text" placeholder="email" name="regemail">
-            <input class="input" type="password" placeholder="password" name="regpass">
+        <form action="/auth" method="post">
+            <input class="input" type="text" placeholder="login" name="regLogin">
+            <input class="input" type="text" placeholder="first name" name="regFName">
+            <input class="input" type="text" placeholder="last name" name="regLName">
+            <input class="input" type="text" placeholder="email" name="regEmail">
+            <input class="input" type="password" placeholder="password" name="regPass">
             <span class="text">Зареєстровані ?<br><a class="links"
                     onclick="anichange('#reg'); anichange('#auth'); return false;">Авторизуватись.</a></span>
             <button class="submit">Sign up</button>
