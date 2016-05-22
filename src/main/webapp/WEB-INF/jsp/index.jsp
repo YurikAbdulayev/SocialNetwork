@@ -35,10 +35,10 @@
             </form>
         </div>
     </div>
-    <a href="search.jsp" class="link" id="searchLink">Search</a>
-    <a href="index.jsp" style="background-color: rgba(47, 44, 44, 0.8)" class="link">Profile</a>
-    <a href="friends.jsp" class="link">Friends</a>
-    <a href="messages.jsp" class="link">Messages</a>
+    <a href="/search" class="link" id="searchLink">Search</a>
+    <a href="/home" style="background-color: rgba(47, 44, 44, 0.8)" class="link">Profile</a>
+    <a href="/friends" class="link">Friends</a>
+    <a href="/messages" class="link">Messages</a>
 </header>
 <div id="globalBlock" onmouseover="unanichanged('#profileTools'); return false">
     <div id="leftSection">

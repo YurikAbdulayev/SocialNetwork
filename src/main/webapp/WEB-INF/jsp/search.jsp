@@ -25,15 +25,15 @@
         <span id="nameProfile">Jonh Malkovich</span>
         <img src="/resources/img/profile.jpg" onmouseover="anichanged('#profileTools'); return false" alt="">
         <div id="profileTools" style="display: none">
-            <a class="href" href="index.jsp"><p class="tools">Profile</p></a>
-            <a class="href" href="editProfile.jsp"><p class="tools">Edit profile</p></a>
-            <a class="href" href="auth.jsp"><p class="tools">Exit</p></a>
+            <a class="href" href="/home"><p class="tools">Profile</p></a>
+            <a class="href" href="/edit"><p class="tools">Edit profile</p></a>
+            <a class="href" href="/auth"><p class="tools">Exit</p></a>
         </div>
     </div>
-    <a href="search.jsp" style="background-color: rgba(47, 44, 44, 0.8)" class="link" id="searchLink">Search</a>
-    <a href="index.jsp" class="link">Profile</a>
-    <a href="friends.jsp" class="link">Friends</a>
-    <a href="messages.jsp" class="link">Messages</a>
+    <a href="/search" style="background-color: rgba(47, 44, 44, 0.8)" class="link" id="searchLink">Search</a>
+    <a href="/home" class="link">Profile</a>
+    <a href="/friends" class="link">Friends</a>
+    <a href="/messages" class="link">Messages</a>
 </header>
 <div style="width: 100%; height: 80vh;" onmouseover="unanichanged('#profileTools'); return false">
     <div id="globalBlock">
