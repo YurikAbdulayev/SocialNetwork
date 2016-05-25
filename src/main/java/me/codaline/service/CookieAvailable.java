@@ -7,14 +7,15 @@ import org.springframework.ui.ModelMap;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
+import static me.codaline.helpers.C.TOKEN;
+
 /**
  * Created by yurik on 21.05.16.
  */
 public class CookieAvailable {
-    public static final String TOKEN = "token_value";
 
 
-    public static AuthModel getCookie(String s, HttpServletRequest request, ModelMap modelMap, AuthService service) {
+    public static AuthModel getCookie(String s, HttpServletRequest request, ModelMap modelMap, UserService service) {
         AuthModel model = new AuthModel();
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {

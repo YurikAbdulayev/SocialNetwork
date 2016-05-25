@@ -16,6 +16,16 @@
 <div id="globalBlock">
     <div class="title"><span>Додайте більше інформації</span></div>
     <hr>
+    <div id="profile">
+        <img src="/resources/img/${user.pathImage}">
+    </div>
+    <form method="POST" action="uploadFile?userImageId=${user.id}" enctype="multipart/form-data">
+        Оберіть фото профілю: <input type="file" name="file"><br/>
+        <%--Name: <input type="text" name="name"><br/> <br/>--%>
+        <%--<input type="hidden" id="userImageId" value="${user.id}">--%>
+        <input type="submit" value="Застосувати..."> Натисніть для збереження
+    </form>
+
     <form action="/edit" method="post">
         <input class="input" type="text" placeholder="Ім'я" name="e_name" value="${user.firstName}">
         <input class="input" type="text" placeholder="Прізвище" name="e_surname" value="${user.lastName}">

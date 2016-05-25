@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--@elvariable id="user" type="me.codaline.model.User"--%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,17 +44,30 @@
         <input type="text" id="searchLine" placeholder="what are u search?">
         <button id="searchButton">Search</button>
     </div>
-    <div class="friendsList" onmouseover="sendMessageShow('#sendMessage'); return false;"
-         onmouseleave="sendMessageHide('#sendMessage'); return false">
-        <div class="avatarFriend"><img src="/resources/img/profile.jpg" alt=""></div>
-        <div class="nameFriend">
-            <span>Bruce Uyllis</span>
-            <hr>
-            <span>Los Angelise</span>
-            <span><img id="sendMessage" style="display: none; width: 8%; margin-left: 10px;"
-                       src="/resources/img/message.png" alt=""></span>
+
+    <c:forEach items="${friends}" var="user">
+        <%--<c:out value="${name}"/><p>--%>
+        <div class="friendsList" onmouseover="sendMessageShow('#sendMessage${user.id}'); return false;"
+             onmouseleave="sendMessageHide('#sendMessage${user.id}'); return false">
+            <div class="avatarFriend">
+                <a href="/user?id=${user.id}">
+                    <img src="/resources/img/${user.pathImage}" alt="">
+                </a>
+            </div>
+            <div class="nameFriend">
+                <span>${user.firstName} ${user.lastName}</span>
+                <hr>
+                <span>${user.city}</span>
+            <span>
+                <a href="/message?dialog=${user.id}">
+                    <img id="sendMessage${user.id}" style="display: none; width: 8%; margin-left: 10px;"
+                         src="/resources/img/message.png" alt="">
+                </a>
+            </span>
+
+            </div>
         </div>
-    </div>
+    </c:forEach>
 
 </div>
 </body>

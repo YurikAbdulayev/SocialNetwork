@@ -10,6 +10,7 @@ public class User {
     @Id
     @GeneratedValue
     private int id;
+    private String pathImage;
     private String login;
     private String firstName;
     private String lastName;
@@ -175,5 +176,13 @@ public class User {
                 ", pass='" + pass + '\'' +
                 ", jsp='" + token + '\'' +
                 '}';
+    }
+
+    public String getPathImage() {
+        return pathImage;
+    }
+
+    public void setPathImage(String pathImage) {
+        this.pathImage = pathImage;
     }
 }

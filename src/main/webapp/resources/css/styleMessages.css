@@ -86,6 +86,8 @@ ul {
 	resize: none;
 	outline: none;
 	display: inline-block;
+	margin-bottom: 2%;
+	border-bottom: 1vh;
 }
 
 #sendMessage {

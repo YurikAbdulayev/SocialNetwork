@@ -1,6 +1,8 @@
 package me.codaline.service;
 
-import me.codaline.dao.AuthDao;
+import me.codaline.dao.EditProfileDao;
+import me.codaline.dao.UserDao;
+import me.codaline.model.Friends;
 import me.codaline.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,10 +10,15 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class AuthService {
+public class UserService {
 
     @Autowired
-    AuthDao dao;
+    UserDao dao;
+
+    @Autowired
+    EditProfileDao profileDao;
+
+
 
     public User createUser(String login, String password, String email, String firstName, String lastName) {
         User user = new User();
@@ -24,22 +31,28 @@ public class AuthService {
         return user;
     }
 
-    public User saveUser(String name,
-                         String surname,
-                         String nick,
-                         String birth,
-                         String mail,
-                         String pass,
-                         String city,
-                         String phone,
-                         String interests,
-                         String citations,
-                         String about,
-                         String hobby,
-                         String books,
-                         String films,
-                         User user,
-                         int id) {
+    public Friends addToFriend(Friends friends){
+        Friends friends1 = new Friends(friends.getFriendId(), friends.getUserId());
+        dao.addToFriend(friends);
+        dao.addToFriend(friends1);
+        return friends;
+    }
+
+    public List<User> getFrinds(int userId){
+        return dao.getFriendsList(userId);
+    }
+
+    public void deleteFriends(int userId, int friendId){
+        dao.deleteFriend(userId, friendId);
+    }
+
+    public boolean isFriends(int userId, int friendId){
+        return dao.isFriends(userId, friendId);
+    }
+
+    public User updateUser(String name, String surname, String nick, String birth, String mail, String pass,
+                           String city, String phone, String interests, String citations, String about,
+                           String hobby, String books, String films, User user, int id) {
         user.setId(id);
         user.setFirstName(name);
         user.setLastName(surname);
@@ -55,8 +68,12 @@ public class AuthService {
         user.setHobby(hobby);
         user.setBooks(books);
         user.setFilms(films);
-        dao.update(user);
+        dao.updateUser(user);
         return user;
+    }
+
+    public void updatePhoto(int userId, String path){
+        profileDao.updatePhotoUser(userId, path);
     }
 
     public List<User> getUsers() {
@@ -69,6 +86,10 @@ public class AuthService {
 
     public User getUser(String token) {
         return dao.getUser(token);
+    }
+
+    public User getUserToId(int id) {
+        return dao.getUserToId(id);
     }
 
 }
