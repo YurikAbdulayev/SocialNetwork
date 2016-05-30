@@ -1,13 +1,14 @@
 <%--@elvariable id="wall_entry" type="me.codaline.model.WallEntry"--%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--@elvariable id="user" type="me.codaline.model.User"--%>
+<%--@elvariable id="my_friend" type="me.codaline.model.User"--%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <html>
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/resources/css/style.css">
     <link rel="stylesheet" href="/resources/css/styleMain.css">
-    <title>Profile</title>
+    <title>${user.firstName} ${user.lastName}</title>
     <script type="text/javascript" src="/resources/js/jquery.min.js"></script>
     <script type="text/javascript" src="/resources/js/script.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -32,15 +33,12 @@
 <header>
     <div id="profile">
         <span id="nameProfile">${user.firstName} ${user.lastName}</span>
-        <img src="/resources/img/${user.pathImage}" align="center" onmouseover="anichanged('#profileTools'); return false" alt="">
+        <img style="background: url('/getImg?id=${user.id}') center no-repeat; background-size: cover;"
+             align="center" onmouseover="anichanged('#profileTools'); return false" >
         <div id="profileTools" style="display: none">
             <a class="href" href="/home"><p class="tools">Моя сторінка</p></a>
             <a class="href" href="/edit"><p class="tools">Редагувати стрінку</p></a>
-            <form action="/auth" method="get">
-                <p class="tools">
-                    <button class="button">Вийти</button>
-                </p>
-            </form>
+            <a class="href" href="/auth"><p class="tools">Вийти</p></a>
         </div>
     </div>
     <a href="/search" class="link" id="searchLink">Пошук</a>
@@ -52,7 +50,7 @@
     <div id="leftSection">
         <div id="photoSection">
             <div id="profilePhoto"
-                 style="background: url('/resources/img/${user.pathImage}') center; -webkit-background-size: cover;background-size: cover;">
+                 style="background: url('/getImg?id=${user.id}') center; -webkit-background-size: cover;background-size: cover;">
             </div>
             <div id="profileGalary">
                 <!--Цикл що виводить блоки фоток з бд-->
@@ -83,11 +81,12 @@
             <div id="actions" style="display: none;">
                 <c:if test="${my_id != user.id}">
                     <c:if test="${friend == false}">
-                    <img src="<c:url value="/resources/img/plus.png"/>" onclick="addToFriend(${user.id}, ${my_id})"
-                         title="Додати до друзів"></c:if>
+                        <img src="<c:url value="/resources/img/plus.png"/>" onclick="addToFriend(${user.id}, ${my_id})"
+                             title="Додати до друзів"></c:if>
                     <c:if test="${friend}">
-                    <img src="<c:url value="/resources/img/minus.png"/>" onclick="deleteFriend(${user.id}, ${my_id})"
-                         title="Видалити з друзів">
+                        <img src="<c:url value="/resources/img/minus.png"/>"
+                             onclick="deleteFriend(${user.id}, ${my_id})"
+                             title="Видалити з друзів">
                     </c:if>
                     <img src="<c:url value="/resources/img/message.png"/>" title="Надіслати повідомлення">
                 </c:if>
@@ -131,31 +130,14 @@
         </div>
         <div id="profileAttributs">
             <div id="friendsBlock">
-                <a href="friends.jsp" style="text-decoration: none; color: #686868;">Друзі</a>
+                <a href="/friends?userId=${my_id}" style="text-decoration: none; color: #686868;">Друзі</a>
                 <hr>
-                <img class="photoFriends" src="/resources/img/profile.jpg">
-                <img class="photoFriends" src="/resources/img/profile.jpg">
-                <img class="photoFriends" src="/resources/img/profile.jpg">
-                <img class="photoFriends" src="/resources/img/profile.jpg">
-                <img class="photoFriends" src="/resources/img/profile.jpg">
-                <img class="photoFriends" src="/resources/img/profile.jpg">
-                <img class="photoFriends" src="/resources/img/profile.jpg">
-                <img class="photoFriends" src="/resources/img/profile.jpg">
-                <img class="photoFriends" src="/resources/img/profile.jpg">
-                <img class="photoFriends" src="/resources/img/profile.jpg">
-                <img class="photoFriends" src="/resources/img/profile.jpg">
-                <img class="photoFriends" src="/resources/img/profile.jpg">
-                <img class="photoFriends" src="/resources/img/profile.jpg">
-                <img class="photoFriends" src="/resources/img/profile.jpg">
-                <img class="photoFriends" src="/resources/img/profile.jpg">
-                <img class="photoFriends" src="/resources/img/profile.jpg">
-                <img class="photoFriends" src="/resources/img/profile.jpg">
-                <img class="photoFriends" src="/resources/img/profile.jpg">
-                <img class="photoFriends" src="/resources/img/profile.jpg">
-                <img class="photoFriends" src="/resources/img/profile.jpg">
-                <!--<li>
-                    Цикл що виводить блоки друзів з бд
-                </li>-->
+                <c:forEach items="${list_friends}" var="my_friend">
+                    <a href="/user?id=${my_friend.id}">
+                        <div class="photoFriends" style="background: url('/getImg?id=${my_friend.id}')
+                                center no-repeat; background-size: cover;"></div>
+                    </a>
+                </c:forEach>
             </div>
             <div id="wallBlock">
                 <label>Стіна</label>
@@ -164,18 +146,22 @@
                 <input type="button" id="writeInWall" onclick="addMessage(${user.id}, ${my_id})" value="Write">
             </div>
             <ul id="list"></ul>
+
+        <%--<c:forEach items="${wall_list}" var="wall_entry">--%>
+            <%--<ul id="list${wall_entry.id}"></ul>--%>
+            <%--<script>--%>
+            <%--var list = document.getElementById('list${wall_entry.id}');--%>
+            <%--var firstLi = list.getElementsByTagName('LI')[0];--%>
+            <%--var newListElem = document.createElement('LI');--%>
+            <%--newListElem.innerHTML = "${wall_entry.message}";--%>
+            <%--newListElem.className = "message";--%>
+            <%--list.insertBefore(newListElem, firstLi);--%>
+            <%--</script>--%>
+            <%--</c:forEach>--%>
         </div>
     </div>
 
     <script>
-        <%--for (var i = 0; i < 10; i++) {--%>
-        <%--var list = document.getElementById('list');--%>
-        <%--var firstLi = list.getElementsByTagName('LI')[0];--%>
-        <%--var newListElem = document.createElement('LI');--%>
-        <%--newListElem.innerHTML = "${wall_list}";--%>
-        <%--newListElem.className = "message";--%>
-        <%--list.insertBefore(newListElem, firstLi)--%>
-        <%--}--%>
         <c:forEach items="${wall_list}" var="wall_entry">
         var list = document.getElementById('list');
         var firstLi = list.getElementsByTagName('LI')[0];

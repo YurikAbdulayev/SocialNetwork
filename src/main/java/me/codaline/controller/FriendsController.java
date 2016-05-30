@@ -35,7 +35,7 @@ public class FriendsController {
                       @RequestParam(value = "userId")int userId,
                       ModelMap modelMap){
         AuthModel returned = CookieAvailable.getCookie("friends", request, modelMap, service);
-        List<User> users = service.getFrinds(userId);
+        List<User> users = service.getFriends(userId);
         modelMap.addAttribute("friends", users);
         return returned.getJsp().isEmpty() ? "auth" : returned.getJsp();
     }
@@ -45,6 +45,8 @@ public class FriendsController {
                       HttpServletRequest request, ModelMap modelMap){
         User user = service.getUserToId(userId);
         List<WallEntry> entries = wallDao.getEntries(userId);
+        List<User> friends = service.getFriends(userId);
+        modelMap.addAttribute("list_friends", friends);
         modelMap.addAttribute("user", user);
         modelMap.addAttribute("wall_list", entries);
         modelMap.addAttribute("my_id", Utils.getMyId(request));

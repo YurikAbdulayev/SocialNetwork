@@ -3,6 +3,7 @@ package me.codaline.service;
 import me.codaline.dao.EditProfileDao;
 import me.codaline.dao.UserDao;
 import me.codaline.model.Friends;
+import me.codaline.model.Images;
 import me.codaline.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,7 @@ public class UserService {
         user.setEmail(email);
         user.setFirstName(firstName);
         user.setLastName(lastName);
+        user.setPathImage("profile.jpg");
         dao.save(user);
         return user;
     }
@@ -38,7 +40,7 @@ public class UserService {
         return friends;
     }
 
-    public List<User> getFrinds(int userId){
+    public List<User> getFriends(int userId){
         return dao.getFriendsList(userId);
     }
 
@@ -72,8 +74,12 @@ public class UserService {
         return user;
     }
 
-    public void updatePhoto(int userId, String path){
-        profileDao.updatePhotoUser(userId, path);
+    public void updatePhoto(byte[] img, int userId){
+        dao.addImage(img, userId);
+    }
+
+    public Images getImage(int userId){
+        return profileDao.getImage(userId);
     }
 
     public List<User> getUsers() {

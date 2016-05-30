@@ -1,6 +1,8 @@
 package me.codaline.dao;
 
+import me.codaline.model.Images;
 import me.codaline.model.User;
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,4 +28,13 @@ public class EditProfileDao {
         sessionFactory.getCurrentSession().update(user);
 
     }
+
+    public Images getImage(int userId){
+        Criteria criteria = sessionFactory.getCurrentSession()
+                .createCriteria(Images.class)
+                .add(Restrictions.eq("id", userId));
+        return (Images) criteria.uniqueResult();
+    }
+
+
 }

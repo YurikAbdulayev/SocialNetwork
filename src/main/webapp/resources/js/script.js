@@ -23,7 +23,8 @@ function addMessage(userId, writerId) {
     // newListElem.innerHTML = textbox.value+image;
     newListElem.innerHTML = textbox.value;
     newListElem.className = "message";
-    list.insertBefore(newListElem, firstLi)
+    list.insertBefore(newListElem, firstLi);
+    textbox.value = "";
 
 }
 
@@ -49,7 +50,7 @@ function addToFriend(friendId, myId) {
                 user: myId
             },
             complete: function () {
-                window.location.replace("/user?id=" + friendId)
+                window.location.replace("/user?id=" + friendId);
             }
         });
 }
@@ -64,7 +65,38 @@ function deleteFriend(friendId, myId) {
                 user: myId
             },
             complete: function () {
-                window.location.replace("/user?id=" + friendId)
+                window.location.replace("/user?id=" + friendId);
             }
         });
+}
+
+function search(searchText, objName) {
+    // $("#searchLine").keyup(
+    //     if ($(objName).css('display') == 'none') {
+    //         $(objName).animate({height: 'show'}, 400);
+    //     }
+    // } else {
+    //     $(objName).animate({height: 'hide'}, 200);
+    // }
+    $.ajax({
+        type: 'GET',
+        url: "/searchh",
+        data: {
+            line: $('#searchLine').val()
+        },
+        success: function (data) {
+            var response = $(data);
+            if ($(objName).css('display') == 'none') {
+                $(objName).animate({height: 'show'}, 400);
+            }
+            // alert(data);
+            $('#result').html(response.find("#result").html());
+            // if(response.find("#result").h == response.find("#empty")){
+            //     alert("empty");
+            // }else {
+            //     alert("not empty");
+            // }
+        }
+    })
+
 }

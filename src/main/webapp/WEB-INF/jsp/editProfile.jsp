@@ -17,7 +17,7 @@
     <div class="title"><span>Додайте більше інформації</span></div>
     <hr>
     <div id="profile">
-        <img src="/resources/img/${user.pathImage}">
+        <img style="background: url('/getImg?id=${user.id}') center no-repeat; background-size: cover;">
     </div>
     <form method="POST" action="uploadFile?userImageId=${user.id}" enctype="multipart/form-data">
         Оберіть фото профілю: <input type="file" name="file"><br/>

@@ -1,6 +1,7 @@
 package me.codaline.dao;
 
 import me.codaline.model.Friends;
+import me.codaline.model.Images;
 import me.codaline.model.User;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
@@ -26,6 +27,13 @@ public class UserDao {
 
     public void updateUser(User user) {
         sessionFactory.getCurrentSession().update(user);
+    }
+
+    public void addImage(byte[] img, int userId){
+        Images images = new Images();
+        images.setId(userId);
+        images.setImage(img);
+        sessionFactory.getCurrentSession().saveOrUpdate(images);
     }
 
     public void addToFriend(Friends friends) {

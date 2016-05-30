@@ -2,6 +2,7 @@ package me.codaline.controller;
 
 import me.codaline.helpers.C;
 import me.codaline.model.AuthModel;
+import me.codaline.model.User;
 import me.codaline.service.UserService;
 import me.codaline.service.CookieAvailable;
 import org.slf4j.Logger;
@@ -9,16 +10,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 
 /**
  * Created by yurik on 21.05.16.
@@ -61,47 +62,36 @@ public class EditProfileController {
         return "editProfile";
     }
 
-    private static final Logger logger = LoggerFactory
-            .getLogger(EditProfileController.class);
-
-    /**
-     * Upload single file using Spring Controller
-     */
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
     public String uploadFileHandler(HttpServletRequest request, ModelMap modelMap,
-            @RequestParam("file") MultipartFile file,
-            @RequestParam("userImageId") int userId
+                                    @RequestParam("file") MultipartFile file,
+                                    @RequestParam("userImageId") int userId
     ) {
         String name = userId + ".jpg";
 
         if (!file.isEmpty()) {
             try {
                 byte[] bytes = file.getBytes();
+                service.updatePhoto(bytes, userId);
 
-                File dir = new File(C.PATH_PHOTO);
-                if (!dir.exists())
-                    dir.mkdirs();
-
-                // Create the file on server
-                File serverFile = new File(dir.getAbsolutePath()
-                        + File.separator + name);
-                BufferedOutputStream stream = new BufferedOutputStream(
-                        new FileOutputStream(serverFile));
-                stream.write(bytes);
-                stream.close();
-
-                logger.info("Server File Location="
-                        + serverFile.getAbsolutePath());
-
-                service.updatePhoto(userId, "avatar/" + name);
                 return editProfile(request, modelMap);
+
             } catch (Exception e) {
-                return "You failed to upload " + name + " => " + e.getMessage();
+                return "err";
             }
         } else {
-            return "You failed to upload " + name
-                    + " because the file was empty.";
+//            return "You failed to upload " + name
+//                    + " because the file was empty.";
         }
+        return "success";
+    }
+
+    @RequestMapping(value = "/getImg", method = RequestMethod.GET)
+    void getImage(@RequestParam(value = "id") int id, HttpServletResponse response, HttpServletRequest request) throws IOException {
+
+        response.setContentType("image/jpeg, image/jpg, image/png, image/gif");
+        response.getOutputStream().write(service.getImage(id).getImage());
+        response.getOutputStream().close();
     }
 
 }
